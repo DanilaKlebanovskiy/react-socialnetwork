@@ -1,13 +1,16 @@
 .nav{
     grid-area: n;
     background-color: aquamarine;
+    padding: 20px;
+
   }
 
-.item{
+.item a{
     color: azure;
+    text-decoration: none;
 }
 
-.item.active{
-  color:gold;
+.item .seld{
+  color:red;
 }
 

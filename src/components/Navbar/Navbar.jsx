@@ -1,19 +1,20 @@
 import Message from "./Message/Message";
 import s from "./Navbar.module.css"
+import {NavLink} from "react-router-dom";
 const Navbar = () => {
     return <nav className={s.nav}>
         <div className = {s.item}>
-            <a href="/profile">Profile</a>
+            <NavLink to="/profile" activeClassName={s.seld}>Profile</NavLink>
         </div>
         <Message />
         <div className = {s.item}>
-            <a href="/news">News</a>
+            <NavLink to="/news" activeClassName={s.seld}>News</NavLink>
         </div>
         <div className = {s.item}>
-            <a href="/music">Music</a>
+            <NavLink to="/music" activeClassName={s.seld}>Music</NavLink>
         </div>
         <div className = {s.item}>
-            <a href="/settings">Settings</a>
+            <NavLink to="/settings" activeClassName={s.seld}>Settings</NavLink>
         </div>
 
     </nav>
