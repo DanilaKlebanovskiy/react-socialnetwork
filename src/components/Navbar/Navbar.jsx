@@ -3,14 +3,17 @@ import s from "./Navbar.module.css"
 const Navbar = () => {
     return <nav className={s.nav}>
         <div className = {s.item}>
-            <a>Profile</a>
+            <a href="/profile">Profile</a>
         </div>
         <Message />
-        <div className = {s.active}>
-            <a>News</a>
+        <div className = {s.item}>
+            <a href="/news">News</a>
         </div>
         <div className = {s.item}>
-            <a>Music</a>
+            <a href="/music">Music</a>
+        </div>
+        <div className = {s.item}>
+            <a href="/settings">Settings</a>
         </div>
 
     </nav>
