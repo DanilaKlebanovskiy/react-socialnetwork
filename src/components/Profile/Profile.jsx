@@ -1,3 +1,4 @@
+import Myposts from "./Myposts/Myposts"
 import s from "./Profile.module.css"
 const Profile = () => {
     return <div className={s.content}>
@@ -8,20 +9,7 @@ const Profile = () => {
             ava + discript
       <img src="https://d.haberciniz.biz/gallery/10145_40.jpg" />
         </div>
-        <div>
-            my posts
-      <div>
-                new post
-      </div>
-        </div>
-        <div className={s.posts}>
-            <div className={s.item}>
-                Post1
-      </div>
-            <div className={s.item}>
-                Post2
-      </div>
-        </div>
+        <Myposts />
     </div>
 }
 export default Profile
