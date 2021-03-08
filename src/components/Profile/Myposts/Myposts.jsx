@@ -8,8 +8,8 @@ const Myposts = () => {
             <button>Addpost</button>
       </div>
         <div className={s.posts}>
-        <Posts />
-        <Posts />
+        <Posts message = 'ti pesik' likeCount = "15"/>
+        <Posts message = 'ne ho4y na zavod' likeCount ="20" />
     </div>
     </div>
 
