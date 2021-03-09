@@ -1,3 +1,26 @@
-.squirt{
-    text-align: center;
+.dialogs {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+
 }
+
+.dialogsItem .dialog {
+    padding: 20px;
+
+}
+.dialogsItem .dialog a {
+    text-decoration: none;
+}
+
+.dialogsItem .active{
+    color: red;
+}
+
+.messages {
+    padding: 20px;
+}
+
+.messages .message {
+    padding: 20px;
+}
+
