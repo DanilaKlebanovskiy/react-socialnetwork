@@ -10,7 +10,15 @@ const ProfileInfo = (props) => {
 
                 <div><img src={props.avatar} alt="avatar"/></div>
 
-                <div>discript</div>
+                <div>
+                    <div>Danila Klebanovskiy</div>
+                    <ul>
+                         <li>Date of Birth: 18 april</li>
+                         <li>City: Saint-Petersburg</li>
+                        <li>Education: SpbGmty</li>
+                        <li>Web Site: https://sss.com</li>
+                    </ul>
+                </div>
             </div>
         </div>
 

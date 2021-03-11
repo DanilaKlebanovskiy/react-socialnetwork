@@ -5,3 +5,9 @@
 .postBlock .area{
     padding: 10px;
 }
+
+.postArea textarea {
+    resize: none;
+    width: 80%;
+    height: 80px;
+}

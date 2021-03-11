@@ -1,5 +1,6 @@
 import s from "./Myposts.module.css"
 import Posts from "./Posts/Posts"
+
 const Myposts = (props) => {
 
     let newMessage = props.posts
@@ -8,7 +9,7 @@ const Myposts = (props) => {
     return <div className={s.postBlock}>
         my posts
       <div>
-          <div className={s.area}><textarea></textarea></div>
+          <div className={s.postArea}><textarea placeholder="Len' eto igrushka diavola!(C)"></textarea></div>
           <div><button>Addpost</button></div>
       </div>
         <div className={s.posts}>
