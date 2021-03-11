@@ -1,13 +1,8 @@
 import s from "./Myposts.module.css"
 import Posts from "./Posts/Posts"
-const Myposts = () => {
-    let MessageData = [
-        {id: 1, message: 'ti pesik', likeCount: '15'},
-        {id: 2, message: '9 pokushal', likeCount: '20'},
-        {id: 3, message: '4issti vilkoy', likeCount: '10'},
-        {id: 4, message: '4issti loshlkoi', likeCount: '30'}
-    ]
-    let newMessage = MessageData
+const Myposts = (props) => {
+
+    let newMessage = props.posts
         .map(Message => <Posts message = {Message.message} likeCount = {Message.likeCount}/>
         );
     return <div className={s.postBlock}>

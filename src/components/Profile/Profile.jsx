@@ -3,10 +3,12 @@ import s from "./Profile.module.css"
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 
-const Profile = () => {
+const Profile = (props) => {
+
     return <div className={s.content}>
-        <ProfileInfo/>
-        <Myposts/>
+        <ProfileInfo avatar = {props.avatar}
+                     main = {props.main}/>
+        <Myposts posts = {props.posts}/>
     </div>
 }
 export default Profile

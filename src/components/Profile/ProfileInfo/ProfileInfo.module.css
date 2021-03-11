@@ -1,4 +1,14 @@
 .profileInfo .descriptionBlock{
     padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 10px;
 }
 
+.mainPicture img{
+    width: 100%;
+}
+
+.descriptionBlock img{
+    width: 100%
+}
