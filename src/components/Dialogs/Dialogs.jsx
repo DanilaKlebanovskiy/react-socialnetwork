@@ -1,6 +1,6 @@
 import s from "./Dialogs.module.css"
 import DialogsItem from "./DialogItem/DialogItem";
-import Messages from "./Messages/Messages";
+import Message from "./Messages/Message";
 
 
 
@@ -13,7 +13,12 @@ const Dialogs = (props) => {
 
 
     let newMessageData = props.state.messageData.map
-    (message => <Messages valueMessage={message.message}/>
+    (message => {
+        if (message.id % 2 === 0){
+            return <Message style ={"user"} valueMessage={message.message}/>
+        } else {
+            return <Message style ={"oponent"} valueMessage={message.message}/>
+        }}
     )
 
     return (

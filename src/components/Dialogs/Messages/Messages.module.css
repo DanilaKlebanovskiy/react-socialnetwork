@@ -1,0 +1,11 @@
+.message{
+    color: red;
+    padding: 20px;
+}
+.user{
+    align-self: flex-end;
+}
+
+.opponent{
+    align-self: flex-start;
+}

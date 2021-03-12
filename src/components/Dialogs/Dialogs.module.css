@@ -18,9 +18,12 @@
 
 .messages {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
-
-.messages .message {
+.message{
+    color: red;
     padding: 20px;
 }
+
 
