@@ -11,18 +11,19 @@ import Music from "./components/Music/Music";
 
 
 const App = (props) => {
-    debugger
+
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header state={props.state.headerPage}/>
-                <Navbar/>
+                <Navbar state={props.state.siteBar}/>
                 <div className="app-wrapper-content">
                     <Route path='/dialogs'
                            render={() => <Dialogs
                                state = {props.state.dialogsPage}/>}/>
                     <Route path='/profile' render={() => <Profile
-                                state = {props.state.profilePage}/>}/>
+                                state = {props.state.profilePage}
+                                addPost = {props.addPost}/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>

@@ -1,7 +1,7 @@
 import s from "./Dialogs.module.css"
 import DialogsItem from "./DialogItem/DialogItem";
 import Message from "./Messages/Message";
-
+import React, { Component } from 'react';
 
 
 const Dialogs = (props) => {
@@ -20,7 +20,12 @@ const Dialogs = (props) => {
             return <Message style ={"oponent"} valueMessage={message.message}/>
         }}
     )
+    let newMessageElement = React.createRef()
 
+    let addMessage = () => {
+        let text = newMessageElement.current.value
+        alert(text)
+    }
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
@@ -28,6 +33,8 @@ const Dialogs = (props) => {
             </div>
             <div className={s.messages}>
                 {newMessageData}
+                <textarea ref={newMessageElement}></textarea>
+                <button onClick={addMessage}>SendMessage</button>
             </div>
         </div>
     )

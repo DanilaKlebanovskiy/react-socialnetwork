@@ -1,15 +1,6 @@
-.container{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-auto-rows: 1fr 1fr 1fr;
-    grid-gap: 5px;
-    padding: 10px;
-}
-.container img{
+
+.onefriend img{
     width: 50px;
     border-radius: 30px;
-}
-
-.friends{
-    color: white;
+    height: 50px;
 }

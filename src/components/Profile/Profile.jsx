@@ -8,7 +8,7 @@ const Profile = (props) => {
     return <div className={s.content}>
         <ProfileInfo avatar = {props.state.imgAvatar}
                      main = {props.state.imgMain}/>
-        <Myposts posts = {props.state.postsData}/>
+        <Myposts posts = {props.state.postsData} addPost={props.addPost}/>
     </div>
 }
 export default Profile
