@@ -1,3 +1,7 @@
+let rerenderEntireTree = () => {
+    console.log("State")
+}
+
 let state = {
     profilePage : {
         postsData : [
@@ -7,7 +11,8 @@ let state = {
             {id: 4, message: '4issti loshlkoi', likeCount: '30'}
         ], //
         imgAvatar : "https://sun9-39.userapi.com/impf/c840334/v840334011/1d03c/Rf6GaaUJSIE.jpg?size=410x410&quality=96&sign=9f912c64d0e612125a4dbac898b4834a&type=album",//
-        imgMain : "https://i.ytimg.com/vi/INiGRHRElmQ/maxresdefault.jpg"
+        imgMain : "https://i.ytimg.com/vi/INiGRHRElmQ/maxresdefault.jpg",
+        postText : "hochy v voity"
     },
     headerPage : { //
         imgHeader : "https://2.allegroimg.com/s1024/031c65/9b72fbd6480892337b3bad6e5802"
@@ -37,16 +42,38 @@ let state = {
               {name:"Fedor", img:"https://sun9-73.userapi.com/impg/NNPXORAy5V09_i07BPcNpXFFRBmvsdu0cVtnQA/aKGfzXLSueE.jpg?size=750x1624&quality=96&sign=94d529359312e3149afce75157b968b7&type=album"}]
 }
 
-export let addPost = (postMessage) => {
+window.state = state;
+
+export let addPost = () => {
 
     let newPost = {
         id : 5,
-        message : postMessage,
+        message : state.profilePage.postText,
         likeCount : '25'
     }
-    state.profilePage.postsData.push(newPost)
-    console.log(state.profilePage.postsData)
+    state.profilePage.postsData.push(newPost);
+    state.profilePage.postText = '';
+    rerenderEntireTree(state);
 }
 export default state
 
+export let addMessageDialogs = (messageDialog) => {
+
+    let newMessage = {
+        id : 5,
+        message: messageDialog
+    }
+    state.dialogsPage.messageData.push(newMessage)
+    rerenderEntireTree(state);
+}
+
+export let updateNewPostText = (newText) => {
+    state.profilePage.postText = newText
+    rerenderEntireTree(state);
+
+}
+
+export let subscribe = (observed) => {
+    rerenderEntireTree = observed;
+}
 
