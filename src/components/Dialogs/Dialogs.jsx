@@ -2,6 +2,7 @@ import s from "./Dialogs.module.css"
 import DialogsItem from "./DialogItem/DialogItem";
 import Message from "./Messages/Message";
 import React, { Component } from 'react';
+import {updateNewMessageText} from "../Redux/state";
 
 
 const Dialogs = (props) => {
@@ -29,7 +30,7 @@ const Dialogs = (props) => {
 
     let onMessageDaialogsChange = () => {
         let text = newMessageElement.current.value
-        console.log(text)
+        props.updateNewMessageText(text)
     }
     return (
         <div className={s.dialogs}>
@@ -38,7 +39,8 @@ const Dialogs = (props) => {
             </div>
             <div className={s.messages}>
                 {newMessageData}
-                <textarea ref={newMessageElement} onChange={onMessageDaialogsChange}></textarea>
+                <textarea ref={newMessageElement} onChange={onMessageDaialogsChange}
+                          value={props.state.newMessageText}/>
                 <button onClick={addMessage}>SendMessage</button>
             </div>
         </div>
