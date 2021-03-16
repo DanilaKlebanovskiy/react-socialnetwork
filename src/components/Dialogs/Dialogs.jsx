@@ -1,8 +1,8 @@
 import s from "./Dialogs.module.css"
 import DialogsItem from "./DialogItem/DialogItem";
 import Message from "./Messages/Message";
-import React, { Component } from 'react';
-import {updateNewMessageText} from "../Redux/state";
+import React, {Component} from 'react';
+import {addMessageActionCreator, onMessageDaialogsChangeActionCreator} from "../Redux/state";
 
 
 const Dialogs = (props) => {
@@ -12,25 +12,27 @@ const Dialogs = (props) => {
     (dialog => <DialogsItem name={dialog.name} id={dialog.id}/>)
 
 
-
     let newMessageData = props.state.messageData.map
     (message => {
-        if (message.id % 2 === 0){
-            return <Message style ={"user"} valueMessage={message.message}/>
-        } else {
-            return <Message style ={"oponent"} valueMessage={message.message}/>
-        }}
+            if (message.id % 2 === 0) {
+                return <Message style={"user"} valueMessage={message.message}/>
+            } else {
+                return <Message style={"oponent"} valueMessage={message.message}/>
+            }
+        }
     )
     let newMessageElement = React.createRef()
 
+
+
     let addMessage = () => {
         let text = newMessageElement.current.value
-        props.addMessageDialogs(text);
+        props.dispatch(addMessageActionCreator());
     }
 
     let onMessageDaialogsChange = () => {
         let text = newMessageElement.current.value
-        props.updateNewMessageText(text)
+        props.dispatch(onMessageDaialogsChangeActionCreator(text));
     }
     return (
         <div className={s.dialogs}>

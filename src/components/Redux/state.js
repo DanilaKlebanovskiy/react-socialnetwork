@@ -1,3 +1,7 @@
+const ADD_POST= "ADD-POST";
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const ADD_MESSAGE_DIALOGS = "ADD-MESSAGE-DIALOGS";
+const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 export let store = {
     _callSubscriber() {
         console.log("state chenged")
@@ -63,43 +67,71 @@ export let store = {
     subscribe(observer) {
         this._callSubscriber = observer;
     },
-    addPost() {
-
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.postText,//++
-            likeCount: '25'
-        }
-        this._state.profilePage.postsData.push(newPost); //++
-        this._state.profilePage.postText = ''; //++
-        this._callSubscriber(this._state); //--
-    },
-    addMessageDialogs() {
-        let newMessage = {
-            id: 5,
-            message: this._state.dialogsPage.newMessageText //++
-        }
-        this._state.dialogsPage.messageData.push(newMessage) //++
-        this._state.dialogsPage.newMessageText = ''; //++
-        this._callSubscriber(this._state); //--
-
-    },
-    updateNewMessageText(newText) {
-        debugger;
-        this._state.dialogsPage.newMessageText = newText;
-        this._callSubscriber(this._state);
-    },
-
-    updateNewPostText(newText) {
-        this._state.profilePage.postText = newText;
-        this._callSubscriber(this._state);
-    },
 
     getState() {
         return this._state
+    },
+    dispatch(action){
+        if (action.type === ADD_POST){
+            let newPost = {
+                id: 5,
+                message: this._state.profilePage.postText,//++
+                likeCount: '25'
+            }
+            this._state.profilePage.postsData.push(newPost); //++
+            this._state.profilePage.postText = ''; //++
+            this._callSubscriber(this._state);
+        } else if (action.type === ADD_MESSAGE_DIALOGS ) {
+            let newMessage = {
+                id: Math.floor(Math.random()*10),
+                message: this._state.dialogsPage.newMessageText //++
+            }
+            this._state.dialogsPage.messageData.push(newMessage) //++
+            this._state.dialogsPage.newMessageText = ''; //++
+            this._callSubscriber(this._state);
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
+            this._state.profilePage.postText = action.newText;
+            this._callSubscriber(this._state);
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+
+            this._state.dialogsPage.newMessageText = action.newText;
+            this._callSubscriber(this._state);
+        }
+
     }
 
 
+}
+
+export let addPostActionCreator = () => {
+
+    return ({
+        type: ADD_POST,
+    })
+}
+
+export let onPostChangeActionCreator = (text) => {
+    return ({
+        type: UPDATE_NEW_POST_TEXT,
+        newText : text
+    })
+}
+
+export let addMessageActionCreator = () => {
+
+    return {
+        type: ADD_MESSAGE_DIALOGS
+    }
+
+}
+
+
+export let onMessageDaialogsChangeActionCreator = (text) => {
+
+    return {
+        type: UPDATE_NEW_MESSAGE_TEXT,
+        newText: text
+    }
 }
 window.store = store;
 
