@@ -1,5 +1,8 @@
 import profileReducer from "./profile_reducer";
 import dialogsReducer from "./dialogs_reducer";
+import siteBarReducer from "./siteBar_reducer";
+import headerReducer from "./header_reducer";
+
 
 
 export let store = {
@@ -74,6 +77,8 @@ export let store = {
     dispatch(action){
        this._state.profilePage = profileReducer(this._state.profilePage, action);
        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+       this._state.siteBar = siteBarReducer(this._state.siteBar, action);
+       this._state.headerPage = headerReducer(this._state.headerPage, action)
        this._callSubscriber(this.getState())
     }
 
