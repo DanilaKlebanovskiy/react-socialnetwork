@@ -79,7 +79,7 @@ export let store = {
        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
        this._state.siteBar = siteBarReducer(this._state.siteBar, action);
        this._state.headerPage = headerReducer(this._state.headerPage, action)
-       this._callSubscriber(this.getState())
+       this._callSubscriber()
     }
 
 }
