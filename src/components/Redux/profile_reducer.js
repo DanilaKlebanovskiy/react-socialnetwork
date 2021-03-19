@@ -1,5 +1,6 @@
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const DEL_POST = "DEL_POST_TEXT"
 let initialState = {
     postsData: [
         {id: 1, message: 'ti pesik', likeCount: '15'},
@@ -12,6 +13,7 @@ let initialState = {
     postText: "hochy v voity"
 }
 const profileReducer = (state=initialState, action) => {
+    debugger;
     switch (action.type) {
 
         case ADD_POST:
@@ -26,6 +28,10 @@ const profileReducer = (state=initialState, action) => {
         case UPDATE_NEW_POST_TEXT:
             state.postText = action.newText;
             return state
+        case DEL_POST:
+            state.postsData = [];
+            return state
+
         default:
             return state
     }
@@ -43,6 +49,10 @@ const profileReducer = (state=initialState, action) => {
             type: UPDATE_NEW_POST_TEXT,
             newText: text
         })
+    }
+
+    export let delAllPostActionCreator = () => {
+        return {type: DEL_POST}
     }
 
 
