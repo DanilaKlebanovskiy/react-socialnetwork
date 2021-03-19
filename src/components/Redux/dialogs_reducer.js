@@ -1,6 +1,7 @@
 const ADD_MESSAGE_DIALOGS = "ADD-MESSAGE-DIALOGS";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
+
 let initialState = {
     dialogsData: [
         {id: 1, name: "Lera"},
@@ -52,5 +53,7 @@ export let onMessageDaialogsChangeActionCreator = (text) => {
         newText: text
     }
 }
+
+
 
 export default dialogsReducer

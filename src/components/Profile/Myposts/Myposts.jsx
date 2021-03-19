@@ -5,7 +5,11 @@ import React, {Component} from 'react';
 const Myposts = (props) => {
 
     let newMessage = props.postsData
-        .map(Message => <Posts message={Message.message} likeCount={Message.likeCount}/>
+        .map(Message => <Posts
+            editPost={props.editPost}
+            message={Message.message}
+            likeCount={Message.likeCount}
+            id={Message.id}/>
         );
 
 
