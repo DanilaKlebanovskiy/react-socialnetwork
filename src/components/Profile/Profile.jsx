@@ -4,7 +4,7 @@ import MypostsContainer from "./Myposts/MypostsContainer";
 
 
 const Profile = (props) => {
-    debugger;
+
     return <div className={s.content}>
         <ProfileInfo avatar = {props.state.imgAvatar}
                      main = {props.state.imgMain}/>

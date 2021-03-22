@@ -22,19 +22,20 @@ let initialState = {
 }
 
 
-const dialogsReducer = (state=initialState, action) => {
+const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_MESSAGE_DIALOGS :
-            let newMessage = {
-                id: Math.floor(Math.random() * 10),
-                message: state.newMessageText
+            let body = state.newMessageText;
+            return {
+                ...state,
+                newMessageText : '',
+                messageData: [...state.messageData, {id : Math.floor(Math.random() * 10), message: body}]
             }
-            state.messageData.push(newMessage)
-            state.newMessageText = ''
-            return state;
         case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.newText;
-            return state;
+            return {
+                ...state,
+                newMessageText : action.newText
+            }
         default:
             return state;
     }
@@ -53,7 +54,6 @@ export let onMessageDaialogsChangeActionCreator = (text) => {
         newText: text
     }
 }
-
 
 
 export default dialogsReducer

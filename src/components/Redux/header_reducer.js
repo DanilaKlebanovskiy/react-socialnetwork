@@ -1,5 +1,5 @@
 let initialState = {
-    imgHeader: "https://2.allegroimg.com/s1024/031c65/9b72fbd6480892337b3bad6e5802"
+    imgHeader: "https://im0-tub-ru.yandex.net/i?id=6243e531963c680e226570c8e5fa6298&n=13"
 }
 const headerReducer = (state=initialState, action) => {
     return state

@@ -14,28 +14,39 @@ let initialState = {
     postText: "hochy v voity"
 }
 const profileReducer = (state = initialState, action) => {
-    debugger;
+
     switch (action.type) {
-
         case ADD_POST:
-            let newPost = {
-                id: 5,
-                message: state.postText,//++
-                likeCount: '25'
+            let body = state.postText;
+            return {
+                ...state,
+                postText: '',
+                postsData: [...state.postsData, {id: 5, message: body, likeCount: '25'}]
             }
-            state.postsData.push(newPost); //++
-            state.postText = ''
-            return state;
-        case UPDATE_NEW_POST_TEXT:
-            state.postText = action.newText;
-            return state
-        case DEL_POST:
-            state.postsData = [];
-            return state
-        case EDIT_POST:
-            state.postsData.forEach(element => console.log(element.id));
-            return state
+        case
+        UPDATE_NEW_POST_TEXT:
+            return {
+                ...state,
+                postText: action.newText
+            }
 
+        case
+        DEL_POST:
+            return {...state,
+                postsData: []
+            }
+        case
+        EDIT_POST: {
+            let stateCopy = {...state}
+            stateCopy.postsData = [...state.postsData]
+            stateCopy.postsData.forEach(function (element) {
+                if (element.id === action.idPost) {
+                    element.message = "nelzia izmenit";
+                    return stateCopy
+                }
+            })
+            return stateCopy
+        }
         default:
             return state
     }

@@ -4,9 +4,9 @@ import Message from "./Messages/Message";
 import React, {Component} from 'react';
 
 const Dialogs = (props) => {
+    debugger;
     let newDialogsData = props.dialogsData.map
     (dialog => <DialogsItem name={dialog.name} id={dialog.id}/>)
-
     let newMessageData = props.messageData.map
     (message => {
             if (message.id % 2 === 0) {
@@ -23,6 +23,7 @@ const Dialogs = (props) => {
     }
 
     let onMessageDaialogsChange = (z) => {
+        console.log(z)
         let text = z.target.value
         props.onMessageDaialogsChange(text)
     }

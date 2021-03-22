@@ -5,7 +5,7 @@ import headerReducer from "./header_reducer";
 
 
 
-export let store = {
+export const store = {
     _callSubscriber() {
         console.log("state chenged")
     },
