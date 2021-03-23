@@ -3,13 +3,17 @@ import Posts from "./Posts/Posts"
 import React, {Component} from 'react';
 
 const Myposts = (props) => {
-
+    debugger
     let newMessage = props.postsData
         .map(Message => <Posts
+            addEditPost = {props.addEditPost}
+            onChangeEdit={props.onChangeEdit}
             editPost={props.editPost}
             message={Message.message}
             likeCount={Message.likeCount}
-            id={Message.id}/>
+            id={Message.id}
+            flagchange={Message.flagchange}
+            newEditText={props.newEditText}/>
         );
 
 

@@ -1,10 +1,11 @@
 import {
+    addEditPostActionCreator,
     addPostActionCreator,
     delAllPostActionCreator,
-    editPostActionCreator,
+    editPostActionCreator, onChangeEditActionCreator,
     onPostChangeActionCreator
 }
-from "../../Redux/profile_reducer";
+    from "../../Redux/profile_reducer";
 import Myposts from "./Myposts";
 import {connect} from "react-redux";
 
@@ -26,6 +27,14 @@ const mapDispatchToProps = (dispatch) => {
         editPost: (idPost) => {
             let action = editPostActionCreator(idPost)
             dispatch(action);
+        },
+        onChangeEdit : (text,idPost) => {
+            let action = onChangeEditActionCreator(text,idPost)
+            dispatch(action)
+        },
+        addEditPost: () => {
+            let action = addEditPostActionCreator()
+            dispatch(action)
         }
     }
 }
@@ -33,7 +42,8 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
     return {
         postsData: state.profilePage.postsData,
-        newPostText: state.profilePage.postText
+        newPostText: state.profilePage.postText,
+        newEditText: state.profilePage.editpostText
     }
 }
 

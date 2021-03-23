@@ -23,7 +23,6 @@ const Dialogs = (props) => {
     }
 
     let onMessageDaialogsChange = (z) => {
-        console.log(z)
         let text = z.target.value
         props.onMessageDaialogsChange(text)
     }

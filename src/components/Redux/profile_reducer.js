@@ -2,16 +2,19 @@ const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const DEL_POST = "DEL_POST_TEXT"
 const EDIT_POST = "EDIT_POST";
+const UPDATE_EDIT_TEXT = "UPDATE_EDIT_TEXT";
+const ADD_EDIT_POST = "ADD_EDIT_POST"
 let initialState = {
     postsData: [
-        {id: 1, message: 'ti pesik', likeCount: '15' ,flagchange:false},
-        {id: 2, message: '9 pokushal', likeCount: '20', flagchange:false},
-        {id: 3, message: '4issti vilkoy', likeCount: '10',flagchange:false},
-        {id: 4, message: '4issti loshlkoi', likeCount: '30',flagchange:false}
+        {id: 1, message: 'ti pesik', likeCount: '15', flagchange: false},
+        {id: 2, message: '9 pokushal', likeCount: '20', flagchange: false},
+        {id: 3, message: '4issti vilkoy', likeCount: '10', flagchange: false},
+        {id: 4, message: '4issti loshlkoi', likeCount: '30', flagchange: false}
     ], //
     imgAvatar: "https://sun9-39.userapi.com/impf/c840334/v840334011/1d03c/Rf6GaaUJSIE.jpg?size=410x410&quality=96&sign=9f912c64d0e612125a4dbac898b4834a&type=album",//
     imgMain: "https://i.ytimg.com/vi/INiGRHRElmQ/maxresdefault.jpg",
-    postText: "hochy v voity"
+    postText: "hochy v voity",
+    editpostText: ""
 }
 const profileReducer = (state = initialState, action) => {
 
@@ -32,7 +35,8 @@ const profileReducer = (state = initialState, action) => {
 
         case
         DEL_POST:
-            return {...state,
+            return {
+                ...state,
                 postsData: []
             }
         case
@@ -41,12 +45,35 @@ const profileReducer = (state = initialState, action) => {
             stateCopy.postsData = [...state.postsData]
             stateCopy.postsData.forEach(function (element) {
                 if (element.id === action.idPost) {
-                    element.message = "nelzia izmenit";
+                    element.flagchange = true
                     return stateCopy
                 }
             })
             return stateCopy
         }
+        case
+        UPDATE_EDIT_TEXT : {
+            return {
+                ...state,
+                editpostText: action.newText
+
+            }
+        }
+        case
+        ADD_EDIT_POST : {
+            let stateCopy = {...state}
+            stateCopy.postsData = [...state.postsData]
+            stateCopy.postsData.forEach(function (element) {
+                if (element.flagchange === true) {
+                    element.message = state.editpostText
+                    element.flagchange = false
+                    return stateCopy
+
+                }
+            })
+            return stateCopy
+        }
+
         default:
             return state
     }
@@ -74,6 +101,19 @@ export let editPostActionCreator = (idPost) => {
     return {
         type: EDIT_POST,
         idPost: idPost
+    }
+}
+
+export let onChangeEditActionCreator = (text) => {
+    return {
+        type: UPDATE_EDIT_TEXT,
+        newText: text
+    }
+}
+
+export let addEditPostActionCreator = () => {
+    return {
+        type: ADD_EDIT_POST
     }
 }
 export default profileReducer
