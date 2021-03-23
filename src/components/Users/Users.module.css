@@ -1,0 +1,14 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.wrapper img {
+    width: 100px;
+    height: 100px;
+}
+
+.wrapper .grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}

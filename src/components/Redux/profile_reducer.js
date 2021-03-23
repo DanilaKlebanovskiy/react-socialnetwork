@@ -4,10 +4,10 @@ const DEL_POST = "DEL_POST_TEXT"
 const EDIT_POST = "EDIT_POST";
 let initialState = {
     postsData: [
-        {id: 1, message: 'ti pesik', likeCount: '15'},
-        {id: 2, message: '9 pokushal', likeCount: '20'},
-        {id: 3, message: '4issti vilkoy', likeCount: '10'},
-        {id: 4, message: '4issti loshlkoi', likeCount: '30'}
+        {id: 1, message: 'ti pesik', likeCount: '15' ,flagchange:false},
+        {id: 2, message: '9 pokushal', likeCount: '20', flagchange:false},
+        {id: 3, message: '4issti vilkoy', likeCount: '10',flagchange:false},
+        {id: 4, message: '4issti loshlkoi', likeCount: '30',flagchange:false}
     ], //
     imgAvatar: "https://sun9-39.userapi.com/impf/c840334/v840334011/1d03c/Rf6GaaUJSIE.jpg?size=410x410&quality=96&sign=9f912c64d0e612125a4dbac898b4834a&type=album",//
     imgMain: "https://i.ytimg.com/vi/INiGRHRElmQ/maxresdefault.jpg",

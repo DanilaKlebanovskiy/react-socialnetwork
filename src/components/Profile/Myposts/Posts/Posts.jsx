@@ -10,6 +10,8 @@ const Posts = (props) => {
     <div><span>like :  {props.likeCount}</span>
     </div>
     <button onClick={onEdit}>Редактировать</button>
+   {/* {props.flagchange ? <textarea></textarea> }*/}
+
   </div>
 
 }
