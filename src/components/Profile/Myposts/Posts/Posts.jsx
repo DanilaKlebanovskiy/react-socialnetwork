@@ -12,7 +12,8 @@ const Posts = (props) => {
         props.onChangeEdit(text, idPost)
     }
     let addEditPost = () => {
-        props.addEditPost()
+        let idPost = props.id
+        props.addEditPost(idPost)
     }
     return <div className={s.item}>
         <img src="https://vplate.ru/images/article/orig/2019/04/harakteristika-plyusy-i-minusy-porody-shpic-1.jpg"/>

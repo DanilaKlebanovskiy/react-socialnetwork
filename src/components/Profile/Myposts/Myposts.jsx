@@ -13,7 +13,7 @@ const Myposts = (props) => {
             likeCount={Message.likeCount}
             id={Message.id}
             flagchange={Message.flagchange}
-            newEditText={props.newEditText}/>
+            newEditText={Message.editpostText}/>
         );
 
 

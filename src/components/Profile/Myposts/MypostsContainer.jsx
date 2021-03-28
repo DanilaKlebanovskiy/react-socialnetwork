@@ -32,8 +32,8 @@ const mapDispatchToProps = (dispatch) => {
             let action = onChangeEditActionCreator(text,idPost)
             dispatch(action)
         },
-        addEditPost: () => {
-            let action = addEditPostActionCreator()
+        addEditPost: (idPost) => {
+            let action = addEditPostActionCreator(idPost)
             dispatch(action)
         }
     }
@@ -43,7 +43,6 @@ const mapStateToProps = (state) => {
     return {
         postsData: state.profilePage.postsData,
         newPostText: state.profilePage.postText,
-        newEditText: state.profilePage.editpostText
     }
 }
 
