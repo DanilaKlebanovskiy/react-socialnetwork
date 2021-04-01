@@ -4,6 +4,7 @@ const DEL_POST = "DEL_POST_TEXT"
 const EDIT_POST = "EDIT_POST";
 const UPDATE_EDIT_TEXT = "UPDATE_EDIT_TEXT";
 const ADD_EDIT_POST = "ADD_EDIT_POST"
+const SET_PROFILE = "SET_PROFILE"
 let initialState = {
     postsData: [
         {id: 1, message: 'ti pesik', likeCount: '15', flagchange: false, editpostText: ""},
@@ -14,7 +15,7 @@ let initialState = {
     imgAvatar: "https://sun9-39.userapi.com/impf/c840334/v840334011/1d03c/Rf6GaaUJSIE.jpg?size=410x410&quality=96&sign=9f912c64d0e612125a4dbac898b4834a&type=album",//
     imgMain: "https://i.ytimg.com/vi/INiGRHRElmQ/maxresdefault.jpg",
     postText: "hochy v voity",
-
+    profile : null
 }
 const profileReducer = (state = initialState, action) => {
 
@@ -85,6 +86,12 @@ const profileReducer = (state = initialState, action) => {
                 return element
             })
         }
+        case SET_PROFILE :
+            return {
+                ...state,
+                profile : action.profile
+            }
+
 
         default:
             return state
@@ -131,4 +138,13 @@ export let addEditPostActionCreator = (idPost) => {
         idChangePost: idPost
     }
 }
+
+export let setProfile = (profile) => {
+    return {
+        type: SET_PROFILE,
+        profile
+    }
+
+}
+
 export default profileReducer

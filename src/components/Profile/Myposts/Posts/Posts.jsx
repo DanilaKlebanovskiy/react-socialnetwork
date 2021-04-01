@@ -1,7 +1,6 @@
 import s from "./Posts.module.css"
 
 const Posts = (props) => {
-    debugger;
     let onEdit = () => {
         let idPost = props.id
         props.editPost(idPost)

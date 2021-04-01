@@ -3,11 +3,12 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MypostsContainer from "./Myposts/MypostsContainer";
 
 
-const Profile = (props) => {
+
+
+const  Profile = (props) => {
 
     return <div className={s.content}>
-        <ProfileInfo avatar = {props.state.imgAvatar}
-                     main = {props.state.imgMain}/>
+        <ProfileInfo profile = {props.profile}/>
         <MypostsContainer store = {props.store}/>
     </div>
 }
