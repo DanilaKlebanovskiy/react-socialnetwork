@@ -1,29 +1,44 @@
 import s from "./Users.module.css";
 import userPicture from "../../assets/users-picture.jpg";
 import {NavLink} from "react-router-dom";
+import * as axios from "axios";
+import {deleteUnfollow, postFollow} from "../../API/api";
 
-const Users = (props) =>{
+const Users = (props) => {
     {
-        let count = props.totalUsersCount/props.pageSize
+        let count = props.totalUsersCount / props.pageSize
         let pages = []
-        for (let i = 1; i <= count;i++){
+        for (let i = 1; i <= count; i++) {
             pages.push(i)
         }
-        debugger
+
         return <div>
-            {pages.map(c => <span className={props.currentPage === c && s.selectedPage}  onClick={() => {props.onPageChenged(c)}}>{c}</span>) }
+            {pages.map(c => <span className={props.currentPage === c && s.selectedPage} onClick={() => {
+                props.onPageChenged(c)
+            }}>{c}</span>)}
 
             {
                 props.users.map(u => <div key={u.id}>
                     <div className={s.wrapper}>
                         <div>
-                            <NavLink to = {"/profile/" + u.id}><img src={u.photos.large === null ? userPicture : u.photos.large}/></NavLink>
+                            <NavLink to={"/profile/" + u.id}><img
+                                src={u.photos.large === null ? userPicture : u.photos.large}/></NavLink>
                             {u.followed ?
                                 <button onClick={() => {
-                                    props.unfollowUser(u.id)
+                                    deleteUnfollow(u.id).then(data => {
+                                            if (data.resultCode === 0) {
+                                                props.unfollowUser(u.id)
+
+                                            }
+                                        })
                                 }}>UnFollow</button> :
                                 <button onClick={() => {
-                                    props.followingUser(u.id)
+                                    postFollow(u.id).then(data => {
+                                            debugger
+                                            if (data.resultCode === 0) {
+                                                props.followingUser(u.id)
+                                            }
+                                        })
                                 }}>Follow </button>}
 
                         </div>

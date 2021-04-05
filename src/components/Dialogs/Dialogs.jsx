@@ -4,7 +4,6 @@ import Message from "./Messages/Message";
 import React, {Component} from 'react';
 
 const Dialogs = (props) => {
-    debugger;
     let newDialogsData = props.dialogsData.map
     (dialog => <DialogsItem name={dialog.name} id={dialog.id}/>)
     let newMessageData = props.messageData.map

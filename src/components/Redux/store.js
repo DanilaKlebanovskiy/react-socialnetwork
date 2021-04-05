@@ -1,7 +1,7 @@
 import profileReducer from "./profile_reducer";
 import dialogsReducer from "./dialogs_reducer";
 import siteBarReducer from "./siteBar_reducer";
-import headerReducer from "./header_reducer";
+import headerReducer from "./auth_reducer";
 
 
 
