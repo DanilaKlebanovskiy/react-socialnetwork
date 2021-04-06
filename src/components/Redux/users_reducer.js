@@ -1,3 +1,6 @@
+import {usersApi} from "../../API/api";
+
+
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
@@ -12,7 +15,7 @@ let initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress : []
+    followingInProgress: []
 }
 
 
@@ -124,6 +127,41 @@ export let toggleFollowingProgress = (isLoading, userId) => {
 
 }
 
+export const getUsersThunk = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(setFetching(true))
+        usersApi.getUsers(currentPage, pageSize).then(data => {
 
+            dispatch(setUsers(data.items))
+            dispatch(setTotalCounts(data.totalCount))
+            dispatch(setFetching(false))
+        })
+    }
+}
 
+export const unfollowThunk = (userId) => {
+    return(dispatch) => {
+        dispatch(toggleFollowingProgress(true, userId))
+        usersApi.deleteUnfollow(userId).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(unfollowUser(userId))
+            }
+            dispatch(toggleFollowingProgress(false, userId))
+        })
+    }
+}
+
+export const followThunk = (userId) => {
+    return(dispatch) => {
+        dispatch(toggleFollowingProgress(true, userId))
+        usersApi.postFollow(userId).then(data => {
+
+            if (data.resultCode === 0) {
+                dispatch(followingUser(userId))
+            }
+            dispatch(toggleFollowingProgress(false, userId))
+
+        })
+    }
+}
 export default usersReducer

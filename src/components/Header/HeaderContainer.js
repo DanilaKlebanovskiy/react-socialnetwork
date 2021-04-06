@@ -5,16 +5,17 @@ import {connect} from "react-redux";
 import Header from "./Header";
 import {setAuthUserData, setLoading, setUserImage} from "../Redux/auth_reducer";
 import Loading from "../Users/Loading";
+import {headerApi} from "../../API/api";
 
 class HeaderContainer extends React.Component {
     componentDidMount() {
         this.props.setLoading(true)
-        axios.get("https://social-network.samuraijs.com/api/1.0/auth/me", {withCredentials: true}).then(response => {
+        headerApi.getLogin().then(data => {
             this.props.setLoading(false)
-            if (response.data.resultCode === 0) {
-                this.props.setAuthUserData(response.data.data)
-                axios.get("https://social-network.samuraijs.com/api/1.0/profile/2").then(response => {
-                    this.props.setUserImage(response.data.photos.small)
+            if (data.resultCode === 0) {
+                this.props.setAuthUserData(data.data)
+                headerApi.getPictureLogin().then(data => {
+                    this.props.setUserImage(data.photos.small)
 
                 })
             }

@@ -1,13 +1,16 @@
+import {headerApi, usersApi} from "../../API/api";
+import {followingUser, toggleFollowingProgress} from "./users_reducer";
+
 const SET_USER_DATA = "SET_USER_DATA"
 const SET_USER_IMAGE = "SET_USER_IMAGE"
 const TOOGLE_FETCHING = "TOOGLE_FETCHING"
 
 let initialState = {
-    id : null,
-    login : null,
-    email : null,
-    isAuth : false,
-    img : null,
+    id: null,
+    login: null,
+    email: null,
+    isAuth: false,
+    img: null,
     isFetching: false
 }
 
@@ -22,12 +25,12 @@ const authReducer = (state = initialState, action) => {
         case SET_USER_IMAGE :
             return {
                 ...state,
-                img : action.image
+                img: action.image
             }
         case TOOGLE_FETCHING :
             return {
                 ...state,
-                isFetching : action.isLoading
+                isFetching: action.isLoading
             }
         default:
             return state;
@@ -55,5 +58,22 @@ export const setLoading = (isLoading) => {
 }
 
 
-
 export default authReducer
+
+
+export const auththunk = () => {
+    return (dispatch) => {
+        dispatch(setLoading(true))
+        headerApi.getLogin().then(data => {
+            dispatch(setLoading(false))
+            if (data.resultCode === 0) {
+                dispatch(setAuthUserData(data.data))
+                headerApi.getPictureLogin().then(data => {
+                    dispatch(setUserImage(data.photos.small))
+
+                })
+            }
+
+        })
+    }
+}
