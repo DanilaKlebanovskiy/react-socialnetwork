@@ -1,5 +1,4 @@
-import {headerApi, usersApi} from "../../API/api";
-import {followingUser, toggleFollowingProgress} from "./users_reducer";
+import {headerApi} from "../../API/api";
 
 const SET_USER_DATA = "SET_USER_DATA"
 const SET_USER_IMAGE = "SET_USER_IMAGE"
@@ -57,11 +56,8 @@ export const setLoading = (isLoading) => {
     }
 }
 
-
-export default authReducer
-
-
-export const auththunk = () => {
+export const authThunk = () => {
+    debugger
     return (dispatch) => {
         dispatch(setLoading(true))
         headerApi.getLogin().then(data => {
@@ -70,10 +66,15 @@ export const auththunk = () => {
                 dispatch(setAuthUserData(data.data))
                 headerApi.getPictureLogin().then(data => {
                     dispatch(setUserImage(data.photos.small))
-
                 })
             }
 
         })
     }
 }
+
+
+export default authReducer
+
+
+

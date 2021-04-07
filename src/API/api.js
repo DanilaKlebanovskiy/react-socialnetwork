@@ -27,8 +27,13 @@ export const headerApi = {
         return instance.get("auth/me").then(response => response.data)
     },
     getPictureLogin() {
-        return instance.get("profile/2").then(response => response.data)
+        return instance.get("profile/8").then(response => response.data)
     }
 }
 
+export const profileApi = {
+    getProfile(test) {
+        return instance.get(`profile/${test}`).then(response => response.data)
+    }
+}
 

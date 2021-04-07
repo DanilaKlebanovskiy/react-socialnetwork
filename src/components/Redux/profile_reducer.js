@@ -1,3 +1,6 @@
+import {profileApi, usersApi} from "../../API/api";
+import {toggleFollowingProgress, unfollowUser} from "./users_reducer";
+
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const DEL_POST = "DEL_POST_TEXT"
@@ -145,6 +148,14 @@ export let setProfile = (profile) => {
         profile
     }
 
+}
+
+export const getProfileThunk = (userId) => {
+    return(dispatch) => {
+        profileApi.getProfile(userId).then(data => {
+            dispatch(setProfile(data))
+        })
+    }
 }
 
 export default profileReducer

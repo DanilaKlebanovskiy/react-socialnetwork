@@ -9,27 +9,28 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/Users.Container";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import LoginPage from "./components/Login/Login";
 
 
 const App = (props) => {
 
     return (
 
-            <div className="app-wrapper">
-                <HeaderContainer/>
-                <Navbar state={props.state.siteBar}/>
-                <div className="app-wrapper-content">
-                    <Route path='/dialogs'
-                           render={() => <DialogsContainer
-                               state = {props.state.dialogsPage}
-                               store={props.store}/>}/>
-                    <Route path='/profile/:userId' render={() => <ProfileContainer/>}/>
-                    <Route path='/news' component={News}/>
-                    <Route path='/music' component={Music}/>
-                    <Route path='/settings' component={Settings}/>
-                    <Route path='/users' render={() => <UsersContainer/>}/>
-                </div>
+        <div className="app-wrapper">
+            <HeaderContainer/>
+            <Navbar state={props.state.siteBar}/>
+            <div className="app-wrapper-content">
+                <Route path='/login' render={() => <LoginPage/>}/>
+                <Route path='/dialogs'
+                       render={() => <DialogsContainer
+                       />}/>
+                <Route path='/profile/:userId' render={() => <ProfileContainer/>}/>
+                <Route path='/news' component={News}/>
+                <Route path='/music' component={Music}/>
+                <Route path='/settings' component={Settings}/>
+                <Route path='/users' render={() => <UsersContainer/>}/>
             </div>
+        </div>
 
     );
 }

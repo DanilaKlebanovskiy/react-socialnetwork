@@ -1,5 +1,6 @@
 import s from "./ProfileInfo.module.css"
 import Loading from "../../Users/Loading";
+import UserPicture from "../../../assets/users-picture.jpg"
 
 const ProfileInfo = (props) => {
     if (!props.profile.profile) {
@@ -12,7 +13,7 @@ const ProfileInfo = (props) => {
             </div>
             <div className={s.descriptionBlock}>
 
-                <div><img src={props.profile.profile.photos.large}/></div>
+                <div><img src={props.profile.profile.photos.large === null ? UserPicture : props.profile.profile.photos.large }/></div>
 
                 <div>
                     <div>{props.profile.profile.fullName}</div>
