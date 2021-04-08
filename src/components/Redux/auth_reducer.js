@@ -57,7 +57,7 @@ export const setLoading = (isLoading) => {
 }
 
 export const authThunk = () => {
-    debugger
+
     return (dispatch) => {
         dispatch(setLoading(true))
         headerApi.getLogin().then(data => {

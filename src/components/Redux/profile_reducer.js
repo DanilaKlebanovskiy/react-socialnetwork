@@ -10,8 +10,8 @@ const ADD_EDIT_POST = "ADD_EDIT_POST"
 const SET_PROFILE = "SET_PROFILE"
 let initialState = {
     postsData: [
-        {id: 1, message: 'ti pesik', likeCount: '15', flagchange: false, editpostText: ""},
-        {id: 2, message: '9 pokushal', likeCount: '20', flagchange: false, editpostText: ""},
+        {id: 1, message: 'test', likeCount: '15', flagchange: false, editpostText: ""},
+        {id: 2, message: 'test', likeCount: '20', flagchange: false, editpostText: ""},
         {id: 3, message: '4issti vilkoy', likeCount: '10', flagchange: false, editpostText: ""},
         {id: 4, message: '4issti loshlkoi', likeCount: '30', flagchange: false, editpostText: ""}
     ], //
