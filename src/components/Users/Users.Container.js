@@ -17,28 +17,13 @@ class UsersAPI extends React.Component {
         super()
         this.onPageChenged = (c) => {
             this.props.getUsers(c, this.props.pageSize)
-         /*   this.props.setCurrentPage(c)
-            this.props.setFetching(true)
-            debugger
-            getUsers2(c, this.props.pageSize).then(data => {
 
-                this.props.setUsers(data.items)
-                this.props.setFetching(false)
-            })*/
         }
     }
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
-/*        if (this.props.users.length === 0) { // this.props.currentPage this.props.pageSize
-            this.props.setFetching(true)
-            getUsers(this.props.currentPage, this.props.pageSize).then(data => {
 
-                this.props.setUsers(data.items)
-                this.props.setTotalCounts(data.totalCount)
-                this.props.setFetching(false)
-            })
-        }*/
     }
 
     render() {
@@ -62,28 +47,7 @@ class UsersAPI extends React.Component {
 }//
 
 
-/*const mapDispatchToProps = (dispatch) => {
-    return {
-        followingUser: (userId) => {
-            dispatch(followActionCreator(userId))
-        },
-        unfollowUser: (userId) => {
-            dispatch(unfollowActionCreator(userId))
-        },
-        setUsers: (users) => {
-            dispatch(setUsersActionCreator(users))
-        },
-        setCurrentPage: (page) => {
-            dispatch(currentPageActionCreator(page))
-        },
-        setTotalCounts: (totalCount) => {
-            dispatch(setTotalCountsActonCreator(totalCount))
-        },
-        setFetching: (isLoading) => {
-            dispatch(fetchingActionCreator(isLoading))
-        }
-    }
-}*/
+
 
 const mapStateToProps = (state) => {
     return {
