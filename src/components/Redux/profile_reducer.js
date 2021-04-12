@@ -1,6 +1,7 @@
 import {profileApi, usersApi} from "../../API/api";
 import {toggleFollowingProgress, unfollowUser} from "./users_reducer";
 
+const SET_PROFILE_STATUS = "SET_PROFILE_STATUS"
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const DEL_POST = "DEL_POST_TEXT"
@@ -18,7 +19,8 @@ let initialState = {
     imgAvatar: "https://sun9-39.userapi.com/impf/c840334/v840334011/1d03c/Rf6GaaUJSIE.jpg?size=410x410&quality=96&sign=9f912c64d0e612125a4dbac898b4834a&type=album",//
     imgMain: "https://i.ytimg.com/vi/INiGRHRElmQ/maxresdefault.jpg",
     postText: "hochy v voity",
-    profile : null
+    profile: null,
+    profileStatus: "test"
 }
 const profileReducer = (state = initialState, action) => {
 
@@ -49,7 +51,7 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 postsData: state.postsData.map(element => {
                     if (element.id === action.idPost) {
-                        return {...element, flagchange : true}
+                        return {...element, flagchange: true}
                     }
                     return element
                 })
@@ -60,42 +62,33 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 postsData: state.postsData.map(element => {
-                    if (element.id === action.idChangePost){
-                        return {...element , editpostText : action.newText}
+                    if (element.id === action.idChangePost) {
+                        return {...element, editpostText: action.newText}
                     }
                     return element
                 })
             }
         case
-        ADD_EDIT_POST : /*{
-            let stateCopy = {...state}
-            stateCopy.postsData = [...state.postsData]
-            stateCopy.postsData.forEach(function (element) {
-                if (element.id === action.idChangePost) {
-                    element.message = element.editpostText
-                    element.flagchange = false
-                    return stateCopy
-
-                }
-            })
-            return stateCopy
-        }*/
-        return {
-            ...state,
-            postsData : state.postsData.map(element => {
-                if (element.id === action.idChangePost){
-                    return {...element, message: element.editpostText, flagchange: false}
-                }
-                return element
-            })
-        }
+        ADD_EDIT_POST :
+            return {
+                ...state,
+                postsData: state.postsData.map(element => {
+                    if (element.id === action.idChangePost) {
+                        return {...element, message: element.editpostText, flagchange: false}
+                    }
+                    return element
+                })
+            }
         case SET_PROFILE :
             return {
                 ...state,
-                profile : action.profile
+                profile: action.profile
             }
-
-
+        case SET_PROFILE_STATUS :
+            return {
+                ...state,
+                profileStatus: action.status
+            }
         default:
             return state
     }
@@ -127,7 +120,7 @@ export let editPostActionCreator = (idPost) => {
     }
 }
 
-export let onChangeEditActionCreator = (text,idPost) => {
+export let onChangeEditActionCreator = (text, idPost) => {
     return {
         type: UPDATE_EDIT_TEXT,
         newText: text,
@@ -150,11 +143,40 @@ export let setProfile = (profile) => {
 
 }
 
+export let setProfileStatus = (status) => {
+    return {
+        type: SET_PROFILE_STATUS,
+        status
+    }
+}
+
 export const getProfileThunk = (userId) => {
-    return(dispatch) => {
+    return (dispatch) => {
         profileApi.getProfile(userId).then(data => {
             dispatch(setProfile(data))
         })
+    }
+}
+
+export const getStatusThunk = (userId) => {
+    return (dispatch) => {
+        profileApi.getStatus(userId).then(response => {
+            debugger;
+            dispatch(setProfileStatus(response.data)
+            )
+        })
+    }
+}
+
+export const updateStatusThunk = (status) => {
+    return (dispatch) => {
+        profileApi.updateStatus(status)
+            .then(response => {
+                debugger;
+                if (response.data.resultCode === 0)
+                    dispatch(setProfileStatus(status)
+                    )
+            })
     }
 }
 

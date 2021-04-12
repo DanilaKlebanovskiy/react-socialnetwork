@@ -1,6 +1,8 @@
 import s from "./ProfileInfo.module.css"
 import Loading from "../../Users/Loading";
 import UserPicture from "../../../assets/users-picture.jpg"
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
+
 
 const ProfileInfo = (props) => {
     if (!props.profile.profile) {
@@ -8,9 +10,10 @@ const ProfileInfo = (props) => {
     }
     return (
         <div className={s.profileInfo}>
-            <div className={s.mainPicture}>
+
+     {/*       <div className={s.mainPicture}>
                 <img src={props.profile.imgMain}/>
-            </div>
+            </div>*/}
             <div className={s.descriptionBlock}>
 
                 <div><img src={props.profile.profile.photos.large === null ? UserPicture : props.profile.profile.photos.large }/></div>
@@ -25,6 +28,7 @@ const ProfileInfo = (props) => {
                         <li>Web Site: https://sss.com</li>
                     </ul>
                 </div>
+                <ProfileStatus status = {props.status} updateStatus = {props.updateStatus}/>
             </div>
         </div>
 

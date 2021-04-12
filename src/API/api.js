@@ -34,6 +34,18 @@ export const headerApi = {
 export const profileApi = {
     getProfile(test) {
         return instance.get(`profile/${test}`).then(response => response.data)
+    },
+    getStatus(userId){
+        return instance.get( `/profile/status/${userId}`)
+    },
+    updateStatus(status) {
+        return instance.put(`/profile/status`, {status : status})
     }
 }
 
+export const loginApi = {
+    postLogin(email,password,rememberMe=false) {
+        console.log(email,password,rememberMe)
+        return instance.post(`/auth/login`, {email : email,password : password,rememberMe:rememberMe})
+    }
+}

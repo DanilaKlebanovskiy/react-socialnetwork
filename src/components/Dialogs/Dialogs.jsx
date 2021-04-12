@@ -3,11 +3,12 @@ import DialogsItem from "./DialogItem/DialogItem";
 import Message from "./Messages/Message";
 import React, {Component} from 'react';
 import {Redirect} from "react-router-dom"
+import {Field, reduxForm} from "redux-form";
 
 
 const Dialogs = (props) => {
 
-   if (!props.isAuth) return <Redirect to={"/login"}/>
+    if (!props.isAuth) return <Redirect to={"/login"}/>
     let newDialogsData = props.dialogsData.map
     (dialog => <DialogsItem name={dialog.name} id={dialog.id}/>)
     let newMessageData = props.messageData.map
@@ -19,16 +20,19 @@ const Dialogs = (props) => {
             }
         }
     )
-    let newMessageElement = React.createRef()
 
-    let addMessage = () => {
-        props.addMessage()
+
+
+
+    let AddNewMessage = (values) => {
+        props.addMessage(values)
     }
 
-    let onMessageDaialogsChange = (z) => {
-        let text = z.target.value
-        props.onMessageDaialogsChange(text)
+    let onSubmit = (values) => {
+        AddNewMessage(values.newMessageText)
+
     }
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
@@ -36,12 +40,24 @@ const Dialogs = (props) => {
             </div>
             <div className={s.messages}>
                 {newMessageData}
-                <textarea ref={newMessageElement} onChange={onMessageDaialogsChange}
-                          value={props.newMessageText}/>
-                <button onClick={addMessage}>SendMessage</button>
+                <ReduxDialogsForm onSubmit={onSubmit}/>
             </div>
         </div>
     )
 }
+
+const DialogsForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field placeholder={"enter your message"} name={"newMessageText"} component={"textarea"}/>
+            </div>
+            <div>
+                <button>SendMessage</button>
+            </div>
+        </form>
+    )
+}
+const ReduxDialogsForm = reduxForm({form: 'dialogs'})(DialogsForm)
 
 export default Dialogs

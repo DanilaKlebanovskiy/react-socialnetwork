@@ -9,7 +9,8 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/Users.Container";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import LoginPage from "./components/Login/Login";
+import Login from "./components/Login/Login";
+
 
 
 const App = (props) => {
@@ -20,7 +21,7 @@ const App = (props) => {
             <HeaderContainer/>
             <Navbar state={props.state.siteBar}/>
             <div className="app-wrapper-content">
-                <Route path='/login' render={() => <LoginPage/>}/>
+                <Route path='/login' render={() => <Login/>}/>
                 <Route path='/dialogs'
                        render={() => <DialogsContainer
                        />}/>
