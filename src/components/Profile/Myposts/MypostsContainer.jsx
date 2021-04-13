@@ -12,14 +12,11 @@ import {connect} from "react-redux";
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateNewPostText: (text) => {
-            let action = onPostChangeActionCreator(text);
+        addPost: (text) => {
+            let action = addPostActionCreator(text);
             dispatch(action)
         },
-        addPost: () => {
-            let action = addPostActionCreator()
-            dispatch(action)
-        },
+
         delAllPost: () => {
             let action = delAllPostActionCreator()
             dispatch(action)

@@ -2,7 +2,7 @@ import s from "./Posts.module.css"
 
 const Posts = (props) => {
     let onEdit = () => {
-        let idPost = props.id
+          let idPost = props.id
         props.editPost(idPost)
     }
     let onChangeEdit = (z) => {

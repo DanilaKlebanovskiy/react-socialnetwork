@@ -1,8 +1,11 @@
 import s from "./Myposts.module.css"
 import Posts from "./Posts/Posts"
 import React, {Component} from 'react';
+import {Field, reduxForm} from "redux-form";
+import {addPostActionCreator} from "../../Redux/profile_reducer";
 
 const Myposts = (props) => {
+
     let newMessage = props.postsData
         .map(Message => <Posts
             addEditPost = {props.addEditPost}
@@ -16,28 +19,18 @@ const Myposts = (props) => {
         );
 
 
-    let newPostElement = React.createRef()
 
-    let onaddPost = () => {
-        props.addPost();
-    }
-
-    let onPostChange = () => {
-        let text = newPostElement.current.value;
-        props.updateNewPostText(text)
-    };
 
     let ondelAllPost = () => {
         props.delAllPost()
     }
+    const onSubmit = (values) => {
+        props.addPost(values.newPostText)
+    }
     return <div className={s.postBlock}>
         my posts
         <div>
-            <div className={s.postArea}><textarea onChange={onPostChange} ref={newPostElement}
-                                                  value={props.newPostText}/></div>
-            <div>
-                <button onClick={onaddPost}>Addpost</button>
-            </div>
+            <ReduxPostForm onSubmit={onSubmit}/>
             <div>
                 <button onClick={ondelAllPost}>Удалить все!</button>
             </div>
@@ -49,4 +42,21 @@ const Myposts = (props) => {
     </div>
 
 }
+
+const PostForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field placeholder={"enter your text"} name={"newPostText"} component={"textarea"}/>
+            </div>
+            <div>
+                <button>Addpost</button>
+            </div>
+        </form>
+
+
+    )
+}
+const ReduxPostForm = reduxForm({form: 'posts'})(PostForm)
+
 export default Myposts

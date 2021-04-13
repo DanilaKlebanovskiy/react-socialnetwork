@@ -18,7 +18,6 @@ let initialState = {
     ], //
     imgAvatar: "https://sun9-39.userapi.com/impf/c840334/v840334011/1d03c/Rf6GaaUJSIE.jpg?size=410x410&quality=96&sign=9f912c64d0e612125a4dbac898b4834a&type=album",//
     imgMain: "https://i.ytimg.com/vi/INiGRHRElmQ/maxresdefault.jpg",
-    postText: "hochy v voity",
     profile: null,
     profileStatus: "test"
 }
@@ -26,19 +25,12 @@ const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD_POST:
-            let body = state.postText;
+            let body = action.newText;
             return {
                 ...state,
                 postText: '',
                 postsData: [...state.postsData, {id: 5, message: body, likeCount: '25'}]
             }
-        case
-        UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                postText: action.newText
-            }
-
         case
         DEL_POST:
             return {
@@ -94,19 +86,15 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export let addPostActionCreator = () => {
+export let addPostActionCreator = (text) => {
 
     return ({
         type: ADD_POST,
-    })
-}
-
-export let onPostChangeActionCreator = (text) => {
-    return ({
-        type: UPDATE_NEW_POST_TEXT,
         newText: text
     })
 }
+
+
 
 export let delAllPostActionCreator = () => {
     return {type: DEL_POST}
