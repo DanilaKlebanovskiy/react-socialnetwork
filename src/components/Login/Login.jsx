@@ -8,11 +8,11 @@ const Login = (props) => {
     const onSubmit = (formData) => {
         console.log(formData)
         loginApi.postLogin(formData.login,formData.password,formData.remeberme).then(response => {
-           if (response.data.resultCode === 1){
+       /*    if (response.data.resultCode === 1){
                alert(response.data.messages)
            } else {
 
-           }
+           }*/
         })
     }
     return (<div>
