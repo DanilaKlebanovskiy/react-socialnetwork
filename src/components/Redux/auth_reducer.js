@@ -1,4 +1,4 @@
-import {headerApi} from "../../API/api";
+import {headerApi, loginApi} from "../../API/api";
 
 const SET_USER_DATA = "SET_USER_DATA"
 const SET_USER_IMAGE = "SET_USER_IMAGE"
@@ -18,7 +18,7 @@ const authReducer = (state = initialState, action) => {
         case SET_USER_DATA :
             return {
                 ...state,
-                ...action.data,
+                ...action.payload,
                 isAuth: true
             }
         case SET_USER_IMAGE :
@@ -35,10 +35,11 @@ const authReducer = (state = initialState, action) => {
             return state;
     }
 }
-export const setAuthUserData = (data) => {
+export const setAuthUserData = (id,login,email,isAuth) => {
+console.log(id,login,email,isAuth)
     return {
         type: SET_USER_DATA,
-        data
+        payload:{id,login,email,isAuth}
     }
 
 }
@@ -63,12 +64,32 @@ export const authThunk = () => {
         headerApi.getLogin().then(data => {
             dispatch(setLoading(false))
             if (data.resultCode === 0) {
-                dispatch(setAuthUserData(data.data))
+                dispatch(setAuthUserData(data.data.id,data.data.login,data.data.email,true))
                 headerApi.getPictureLogin().then(data => {
                     dispatch(setUserImage(data.photos.small))
                 })
             }
 
+        })
+    }
+}
+
+//formData.login,formData.password,formData.remeberme
+export const loginThunk = (login,password,rememberMe) => {
+    return(dispatch) => {
+        loginApi.postLogin(login,password,rememberMe).then(response => {
+            console.log(response.data.resultCode)
+            if (response.data.resultCode === 0){
+                dispatch(authThunk())
+            }
+        })
+    }
+}
+
+export const logoutThunk = () => {
+    return(dispatch) => {
+        loginApi.deleteLogin().then(data => {
+            dispatch(setAuthUserData(null,null,null,false))
         })
     }
 }

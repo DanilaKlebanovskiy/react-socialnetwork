@@ -1,4 +1,5 @@
-import {usersApi} from "../../API/api";
+import {loginApi, usersApi} from "../../API/api";
+import {authThunk} from "../Redux/auth_reducer";
 
 
 const FOLLOW = "FOLLOW"
@@ -164,4 +165,5 @@ export const followThunk = (userId) => {
         })
     }
 }
+
 export default usersReducer

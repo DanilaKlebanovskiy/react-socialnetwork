@@ -47,5 +47,8 @@ export const loginApi = {
     postLogin(email,password,rememberMe=false) {
         console.log(email,password,rememberMe)
         return instance.post(`/auth/login`, {email : email,password : password,rememberMe:rememberMe})
+    },
+    deleteLogin() {
+        return instance.delete(`/auth/login`).then(response => response.data)
     }
 }

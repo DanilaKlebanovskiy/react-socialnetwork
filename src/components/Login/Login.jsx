@@ -2,18 +2,14 @@ import {Field, reduxForm} from "redux-form";
 import {loginApi, profileApi} from "../../API/api";
 import {setProfileStatus} from "../Redux/profile_reducer";
 import {connect} from "react-redux";
+import {Input} from "../common/FormsControl/FormsControl";
+import {maxLengthCreator, required} from "../../utilits/validators";
+import {authThunk, loginThunk} from "../Redux/auth_reducer";
 
 
 const Login = (props) => {
     const onSubmit = (formData) => {
-        console.log(formData)
-        loginApi.postLogin(formData.login,formData.password,formData.remeberme).then(response => {
-       /*    if (response.data.resultCode === 1){
-               alert(response.data.messages)
-           } else {
-
-           }*/
-        })
+        props.loginThunk(formData.login,formData.password,formData.remeberme)
     }
     return (<div>
             <h1>LOGIN</h1>
@@ -22,16 +18,17 @@ const Login = (props) => {
     )
 }
 
-
+const maxLength30 = maxLengthCreator(30)
+const maxLength20 = maxLengthCreator(20)
 
 const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={"Login"} name={"login"} component={"input"}  />
+                <Field validate = {[required,maxLength20]} placeholder={"Login"} name={"login"} component={Input}  />
             </div>
             <div>
-                <Field placeholder={"Password"} name={"password"} component={"input"}  />
+                <Field validate = {[required,maxLength30]} placeholder={"Password"} name={"password"} component={Input}  />
             </div>
             <div>
                 <Field type = {"checkbox"}  name={"remeberme"} component={"input"}/>Remember me
@@ -45,10 +42,13 @@ const LoginForm = (props) => {
 
 const ReduxLoginForm = reduxForm({form: 'login'})(LoginForm)
 
+const mapStateToProps = (state) => (
+    {
+
+    })
 
 
 
-
-export default Login
+export default connect(mapStateToProps, {loginThunk})(Login)
 
 
