@@ -1,8 +1,10 @@
 import {headerApi, loginApi} from "../../API/api";
+import {stopSubmit} from "redux-form"
 
 const SET_USER_DATA = "SET_USER_DATA"
 const SET_USER_IMAGE = "SET_USER_IMAGE"
 const TOOGLE_FETCHING = "TOOGLE_FETCHING"
+const SET_CAPTCHA = "SET_CAPTCHA"
 
 let initialState = {
     id: null,
@@ -10,7 +12,8 @@ let initialState = {
     email: null,
     isAuth: false,
     img: null,
-    isFetching: false
+    isFetching: false,
+    captchaUrl: null
 }
 
 const authReducer = (state = initialState, action) => {
@@ -19,7 +22,6 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.payload,
-                isAuth: true
             }
         case SET_USER_IMAGE :
             return {
@@ -30,6 +32,11 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: action.isLoading
+            }
+        case SET_CAPTCHA :
+            return {
+                ...state,
+                captchaUrl: action.capthaUrl
             }
         default:
             return state;
@@ -57,6 +64,14 @@ export const setLoading = (isLoading) => {
     }
 }
 
+export const setCaptcha = (capthaUrl) => {
+
+    return {
+        type: SET_CAPTCHA,
+        capthaUrl
+    }
+}
+
 export const authThunk = () => {
 
     return (dispatch) => {
@@ -77,11 +92,19 @@ export const authThunk = () => {
 //formData.login,formData.password,formData.remeberme
 export const loginThunk = (login,password,rememberMe) => {
     return(dispatch) => {
+        let action = stopSubmit("login",{login: "Email hui wrong"})
+        dispatch(action)
+        return;
         loginApi.postLogin(login,password,rememberMe).then(response => {
-            console.log(response.data.resultCode)
             if (response.data.resultCode === 0){
                 dispatch(authThunk())
             }
+            else if (response.data.resultCode === 1) {
+
+                alert(response.data.messages)
+            }else {
+                loginApi.getCaptha().then(response => setCaptcha(response.data.url))
+                            }
         })
     }
 }

@@ -9,7 +9,7 @@ const Header = (props) => {
         <img  src={"https://storage.vsemayki.ru/images/0/1/1627/1627355/previews/people_101_flag_auto_front_white_500.jpg"} alt="power"/>
         <div className={s.loginBlock}>
 
-            {props.isAuth ? <div>{props.login}<img className={s.test} src={props.img === null ? userPicture : props.img} /> </div>: <NavLink to = {"/login/"}>Login</NavLink>}
+            {props.isAuth ? <div>{props.login}<img className={s.test} src={props.img === null ? userPicture : props.img} /> <span><button onClick={props.logoutThunk}>Logout</button> </span> </div> : <NavLink to = {"/login/"}>Login</NavLink>}
         </div>
     </header>
 }

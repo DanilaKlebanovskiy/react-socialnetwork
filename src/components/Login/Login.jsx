@@ -1,15 +1,21 @@
 import {Field, reduxForm} from "redux-form";
-import {loginApi, profileApi} from "../../API/api";
-import {setProfileStatus} from "../Redux/profile_reducer";
 import {connect} from "react-redux";
 import {Input} from "../common/FormsControl/FormsControl";
 import {maxLengthCreator, required} from "../../utilits/validators";
 import {authThunk, loginThunk} from "../Redux/auth_reducer";
+import {Redirect} from "react-router-dom";
+import React from "react";
 
 
 const Login = (props) => {
-    const onSubmit = (formData) => {
-        props.loginThunk(formData.login,formData.password,formData.remeberme)
+
+    const onSubmit = (data) => {
+
+        props.loginThunk(data.login,data.password,data.remeberme)
+
+    }
+    if (props.isAuth){
+        return <Redirect to={"/profile"}/>
     }
     return (<div>
             <h1>LOGIN</h1>
@@ -28,11 +34,14 @@ const LoginForm = (props) => {
                 <Field validate = {[required,maxLength20]} placeholder={"Login"} name={"login"} component={Input}  />
             </div>
             <div>
-                <Field validate = {[required,maxLength30]} placeholder={"Password"} name={"password"} component={Input}  />
+                <Field validate = {[required,maxLength30]} placeholder={"Password"} type={"password"} name={"password"} component={Input}  />
             </div>
             <div>
                 <Field type = {"checkbox"}  name={"remeberme"} component={"input"}/>Remember me
             </div>
+        {/*    <div className={s.form-summary-error}>
+                Error
+            </div>*/}
             <div>
                 <button>Login</button>
             </div>
@@ -42,13 +51,20 @@ const LoginForm = (props) => {
 
 const ReduxLoginForm = reduxForm({form: 'login'})(LoginForm)
 
-const mapStateToProps = (state) => (
-    {
 
-    })
+const mapStateToProps = (state) =>{
+    return {
+        isAuth: state.auth.isAuth,
+        catcha: state.auth.captchaUrl
+
+    }
+}
 
 
 
 export default connect(mapStateToProps, {loginThunk})(Login)
 
+/*export default compose(connect(null, {loginThunk}),
+    withProfileRedirect
+)(Login)*/
 

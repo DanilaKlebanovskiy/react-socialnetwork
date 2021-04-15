@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import Header from "./Header";
-import {authThunk} from "../Redux/auth_reducer";
+import {authThunk, logoutThunk} from "../Redux/auth_reducer";
 import Loading from "../Users/Loading";
 
 
@@ -26,4 +26,4 @@ const mapStateToProps = (state) => (
         isFetching: state.auth.isFetching
     })
 
-export default connect(mapStateToProps, {authThunk})(HeaderContainer)
+export default connect(mapStateToProps, {authThunk,logoutThunk})(HeaderContainer)
