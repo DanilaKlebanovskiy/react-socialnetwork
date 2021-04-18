@@ -1,6 +1,8 @@
 import s from "./Posts.module.css"
+import UserPhoto from "../../../../assets/users-picture.jpg"
 
 const Posts = (props) => {
+
     let onEdit = () => {
           let idPost = props.id
         props.editPost(idPost)
@@ -15,7 +17,7 @@ const Posts = (props) => {
         props.addEditPost(idPost)
     }
     return <div className={s.item}>
-        <img src="https://vplate.ru/images/article/orig/2019/04/harakteristika-plyusy-i-minusy-porody-shpic-1.jpg"/>
+        {props.profileImg ? <img src={props.profileImg}/> : <img src={UserPhoto}/>}
         {props.message}
         <div><span>like : {props.likeCount}</span>
         </div>

@@ -5,9 +5,12 @@ import {Field, reduxForm} from "redux-form";
 import {addPostActionCreator} from "../../Redux/profile_reducer";
 import {maxLengthCreator, required} from "../../../utilits/validators";
 import {Textarea} from "../../common/FormsControl/FormsControl";
+import Loading from "../../Users/Loading";
 
 const Myposts = (props) => {
-
+    if (!props.profile.profile) {
+        return <Loading/>
+    }
     let newMessage = props.postsData
         .map(Message => <Posts
             addEditPost = {props.addEditPost}
@@ -17,16 +20,18 @@ const Myposts = (props) => {
             likeCount={Message.likeCount}
             id={Message.id}
             flagchange={Message.flagchange}
-            newEditText={Message.editpostText}/>
+            newEditText={Message.editpostText}
+            profileImg={props.profile.profile.photos.large}/>
         );
 
 
+    console.log(newMessage)
 
-
-    let ondelAllPost = () => {
+    const ondelAllPost = () => {
         props.delAllPost()
     }
     const onSubmit = (values) => {
+        console.log(values)
         props.addPost(values.newPostText)
     }
     return <div className={s.postBlock}>

@@ -1,15 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
 import Header from "./Header";
-import {authThunk, logoutThunk} from "../Redux/auth_reducer";
+import {logoutThunk} from "../Redux/auth_reducer";
 import Loading from "../Users/Loading";
 
 
 class HeaderContainer extends React.Component {
-    componentDidMount() {
-        this.props.authThunk()
-    }
-
     render() {
         return <>
         {this.props.isFetching ? <Loading/> : null}
@@ -26,4 +22,4 @@ const mapStateToProps = (state) => (
         isFetching: state.auth.isFetching
     })
 
-export default connect(mapStateToProps, {authThunk,logoutThunk})(HeaderContainer)
+export default connect(mapStateToProps, {logoutThunk})(HeaderContainer)

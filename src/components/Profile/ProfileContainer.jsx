@@ -12,12 +12,13 @@ class ProfileContainer extends React.Component {
 
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = 16042
+            userId = this.props.logUserId
         }
 
         this.props.getProfileThunk(userId)
 
             this.props.getStatusThunk(userId);
+
 
     }
 
@@ -32,10 +33,11 @@ const mapStateToProps = (state) => (
     {
         profile: state.profilePage,
         isAuth: state.auth.isAuth,
-        status: state.profilePage.profileStatus
+        status: state.profilePage.profileStatus,
+        logUserId: state.auth.id
     })
 
-export default compose(connect(mapStateToProps, {getProfileThunk,getStatusThunk,updateStatusThunk}),
+export default compose(connect(mapStateToProps, {getProfileThunk,getStatusThunk,updateStatusThunk,}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)

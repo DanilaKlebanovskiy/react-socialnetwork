@@ -76,7 +76,7 @@ export const authThunk = () => {
 
     return (dispatch) => {
         dispatch(setLoading(true))
-        headerApi.getLogin().then(data => {
+        return headerApi.getLogin().then(data => {
             dispatch(setLoading(false))
             if (data.resultCode === 0) {
                 dispatch(setAuthUserData(data.data.id,data.data.login,data.data.email,true))
@@ -86,21 +86,21 @@ export const authThunk = () => {
             }
 
         })
+
     }
+
 }
 
 //formData.login,formData.password,formData.remeberme
 export const loginThunk = (login,password,rememberMe) => {
     return(dispatch) => {
-        let action = stopSubmit("login",{login: "Email hui wrong"})
-        dispatch(action)
-        return;
         loginApi.postLogin(login,password,rememberMe).then(response => {
             if (response.data.resultCode === 0){
                 dispatch(authThunk())
             }
             else if (response.data.resultCode === 1) {
-
+                let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
+                dispatch(stopSubmit("login",{_error: message}))
                 alert(response.data.messages)
             }else {
                 loginApi.getCaptha().then(response => setCaptcha(response.data.url))

@@ -18,7 +18,7 @@ class ProfileStatus extends React.Component {
         }
 
         this.onStatusChange = (e) => {
-            debugger
+
             this.setState({status:e.target.value})
 
         }

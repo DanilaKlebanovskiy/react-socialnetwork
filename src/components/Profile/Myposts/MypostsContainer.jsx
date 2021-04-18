@@ -40,6 +40,8 @@ const mapStateToProps = (state) => {
     return {
         postsData: state.profilePage.postsData,
         newPostText: state.profilePage.postText,
+       /* profileImg: state.profilePage.profile.photos.large,*/
+        profile: state.profilePage,
     }
 }
 
