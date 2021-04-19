@@ -131,6 +131,7 @@ export let toggleFollowingProgress = (isLoading, userId) => {
 export const getUsersThunk = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(setFetching(true))
+        dispatch(setCurrentPage(currentPage))
         usersApi.getUsers(currentPage, pageSize).then(data => {
 
             dispatch(setUsers(data.items))

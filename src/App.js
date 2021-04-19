@@ -14,7 +14,7 @@ import React from 'react'
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./components/Redux/app_reducer";
-
+import Loading from "./components/Users/Loading";
 
 
 class App extends React.Component {
@@ -23,7 +23,9 @@ class App extends React.Component {
     }
 
     render() {
-
+        if (!this.props.initialized) {
+            return <Loading/>
+        }
         return (
 
             <div className="app-wrapper">
@@ -43,12 +45,15 @@ class App extends React.Component {
             </div>
 
         );
+
     }
 }
 
+const mapStateToProps = (state) => ({
+    initialized: state.app.initialized
+})
 
 export default compose(
     withRouter,
-    connect(null, {initializeApp}),
-
+    connect(mapStateToProps, {initializeApp}),
 )(App)

@@ -8,7 +8,7 @@ let initialState = {
     initialized: false
 }
 
-const authReducer = (state = initialState, action) => {
+const appReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_INITIALIZED :
             return {
@@ -30,6 +30,7 @@ export const initializedSucces = () => {
 
 export const initializeApp = () => (dispatch) => {
         let promise = dispatch(authThunk())
+        debugger
         promise.then(() => {
             dispatch(initializedSucces())
         })
@@ -40,7 +41,7 @@ export const initializeApp = () => (dispatch) => {
 
 
 
-export default authReducer
+export default appReducer
 
 
 

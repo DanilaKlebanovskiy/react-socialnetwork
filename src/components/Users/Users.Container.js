@@ -10,6 +10,14 @@ import {
 import React from 'react'
 import Users from "./Users";
 import Loading from "./Loading";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getisFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../Redux/users_selectors";
 
 
 class UsersAPI extends React.Component {
@@ -49,7 +57,7 @@ class UsersAPI extends React.Component {
 
 
 
-const mapStateToProps = (state) => {
+/*const mapStateToProps = (state) => {
     return {
         followingInProgress: state.userPage.followingInProgress,
         users: state.userPage.users,
@@ -57,6 +65,18 @@ const mapStateToProps = (state) => {
         totalUsersCount: state.userPage.totalUsersCount,
         currentPage: state.userPage.currentPage,
         isFetching: state.userPage.isFetching,
+
+    }
+}*/
+
+const mapStateToProps = (state) => {
+    return {
+        followingInProgress: getFollowingInProgress(state),
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getisFetching(state),
 
     }
 }
