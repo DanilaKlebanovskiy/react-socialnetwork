@@ -13,34 +13,39 @@ class ProfileContainer extends React.Component {
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = this.props.logUserId
-            if (!userId){
+            if (!userId) {
                 this.props.history.push("/login")
             }
         }
 
         this.props.getProfileThunk(userId)
 
-            this.props.getStatusThunk(userId);
+        this.props.getStatusThunk(userId);
 
 
     }
 
     render() {
-        return <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus = {this.props.updateStatusThunk}/>
+        console.log("render")
+        return <Profile {...this.props} profile={this.props.profile} status={this.props.status}
+                        updateStatus={this.props.updateStatusThunk}/>
     }
 
 
 }
 
-const mapStateToProps = (state) => (
-    {
-        profile: state.profilePage,
-        isAuth: state.auth.isAuth,
-        status: state.profilePage.profileStatus,
-        logUserId: state.auth.id
-    })
+const mapStateToProps = (state) => {
+    console.log("mstp")
+    return ({
+            profile: state.profilePage,
+            isAuth: state.auth.isAuth,
+            status: state.profilePage.profileStatus,
+            logUserId: state.auth.id
+        }
+    )
+}
 
-export default compose(connect(mapStateToProps, {getProfileThunk,getStatusThunk,updateStatusThunk,}),
+export default compose(connect(mapStateToProps, {getProfileThunk, getStatusThunk, updateStatusThunk,}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)
