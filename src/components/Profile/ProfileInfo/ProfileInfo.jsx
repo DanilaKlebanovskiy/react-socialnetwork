@@ -2,6 +2,7 @@ import s from "./ProfileInfo.module.css"
 import Loading from "../../Users/Loading";
 import UserPicture from "../../../assets/users-picture.jpg"
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import {ProfileStatusWithHooks} from "./ProfileStatus/ProfileStatusWithHooks";
 
 
 const ProfileInfo = (props) => {
@@ -28,7 +29,7 @@ const ProfileInfo = (props) => {
                         <li>Web Site: https://sss.com</li>
                     </ul>
                 </div>
-                <ProfileStatus status = {props.status} updateStatus = {props.updateStatus}/>
+                <ProfileStatusWithHooks status = {props.status} updateStatus = {props.updateStatus}/>
             </div>
         </div>
 

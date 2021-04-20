@@ -7,9 +7,15 @@ export const getUsers = (state) => {
 export const getUsersSelector = (state) => {
     return getUsers(state).filter(u => true);
 }
+export const getisFetching = (state) => {
+    return state.userPage.isFetching
+}
 
-export const getUsersSuper = createSelector(() => {
-    getUsers(state).filter(u => true)
+
+export const getUsersSuper = createSelector(getUsers, getisFetching, (users,isFetching) => {
+    debugger
+    return users.filter(u => true)
+
 })
 
 export const getPageSize = (state) => {
@@ -24,9 +30,6 @@ export const getCurrentPage = (state) => {
     return state.userPage.currentPage
 }
 
-export const getisFetching = (state) => {
-    return state.userPage.isFetching
-}
 
 export const getFollowingInProgress = (state) => {
     return state.userPage.followingInProgress
