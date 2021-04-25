@@ -1,7 +1,7 @@
 import './App.css';
 
 import Navbar from './components/Navbar/Navbar';
-import {Route, withRouter} from "react-router-dom";
+import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
@@ -11,13 +11,16 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import React from 'react'
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./components/Redux/app_reducer";
 import Loading from "./components/Users/Loading";
+import store from "./components/Redux/redux-store";
 
 
 class App extends React.Component {
+
+
     componentDidMount() {
         this.props.initializeApp()
     }
@@ -47,6 +50,8 @@ class App extends React.Component {
         );
 
     }
+
+
 }
 
 const mapStateToProps = (state) => ({

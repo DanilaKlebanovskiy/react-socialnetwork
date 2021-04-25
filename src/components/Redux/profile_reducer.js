@@ -9,6 +9,7 @@ const EDIT_POST = "EDIT_POST";
 const UPDATE_EDIT_TEXT = "UPDATE_EDIT_TEXT";
 const ADD_EDIT_POST = "ADD_EDIT_POST"
 const SET_PROFILE = "SET_PROFILE"
+const DELETE_ONE_POST ="DELETE_ONE_POST"
 let initialState = {
     postsData: [
         {id: 1, message: 'test', likeCount: '15', flagchange: false, editpostText: ""},
@@ -30,6 +31,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 postText: '',
                 postsData: [...state.postsData, {id: 5, message: body, likeCount: '25'}]
+            }
+        case DELETE_ONE_POST:
+            return {
+                ...state,
+                postsData: state.postsData.filter(p => p.id != action.postId)
             }
         case
         DEL_POST:
@@ -86,6 +92,13 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
+export let deletePost = (postId) => {
+    return ({
+        type: DELETE_ONE_POST,
+        postId
+    })
+}
+
 export let addPostActionCreator = (text) => {
 
     return ({
@@ -138,8 +151,7 @@ export let setProfileStatus = (status) => {
     }
 }
 
-export const getProfileThunk = (userId) => {
-    return (dispatch) => {
+export const getProfileThunk = (userId) => { return (dispatch) => {
         profileApi.getProfile(userId).then(data => {
             dispatch(setProfile(data))
         })

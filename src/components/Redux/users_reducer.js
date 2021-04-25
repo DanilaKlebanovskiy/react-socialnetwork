@@ -1,5 +1,6 @@
 import {loginApi, usersApi} from "../../API/api";
 import {authThunk} from "../Redux/auth_reducer";
+import {updateObjArray} from "../../utilits/objhelper";
 
 
 const FOLLOW = "FOLLOW"
@@ -23,10 +24,7 @@ let initialState = {
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "FAKE":
-        return{
-            ...state, fake: state.fake + 1
-        }
+
         case FOLLOW :
             return {
                 ...state,
@@ -147,7 +145,7 @@ export const getUsersThunk = (currentPage, pageSize) => {
 }
 
 export const unfollowThunk = (userId) => {
-    return(dispatch) => {
+    return (dispatch) => {
         dispatch(toggleFollowingProgress(true, userId))
         usersApi.deleteUnfollow(userId).then(data => {
             if (data.resultCode === 0) {
@@ -159,7 +157,7 @@ export const unfollowThunk = (userId) => {
 }
 
 export const followThunk = (userId) => {
-    return(dispatch) => {
+    return (dispatch) => {
         dispatch(toggleFollowingProgress(true, userId))
         usersApi.postFollow(userId).then(data => {
 

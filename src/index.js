@@ -6,9 +6,9 @@ import App from "./App";
 import store from "./components/Redux/redux-store";
 import {Provider} from "react-redux";
 
-setInterval(() => {
+/*setInterval(() => {
     store.dispatch({type: "FAKE"})
-}, 1000)
+}, 1000)*/
 const rerenderEntireTree = (state) => {
 
     ReactDOM.render(
