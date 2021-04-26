@@ -30,7 +30,6 @@ export const initializedSucces = () => {
 
 export const initializeApp = () => (dispatch) => {
         let promise = dispatch(authThunk())
-        debugger
         promise.then(() => {
             dispatch(initializedSucces())
         })

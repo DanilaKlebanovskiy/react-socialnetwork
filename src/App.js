@@ -1,5 +1,5 @@
 import './App.css';
-
+import store from "./components/Redux/redux-store";
 import Navbar from './components/Navbar/Navbar';
 import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import News from "./components/News/News";
@@ -15,7 +15,7 @@ import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./components/Redux/app_reducer";
 import Loading from "./components/Users/Loading";
-import store from "./components/Redux/redux-store";
+import NavbarContainer from "./components/Navbar/NavbarContainer";
 
 
 class App extends React.Component {
@@ -33,7 +33,7 @@ class App extends React.Component {
 
             <div className="app-wrapper">
                 <HeaderContainer/>
-                <Navbar state={this.props.state.siteBar}/>
+                <NavbarContainer/>
                 <div className="app-wrapper-content">
                     <Route path='/login' render={() => <Login/>}/>
                     <Route path='/dialogs'
@@ -58,7 +58,18 @@ const mapStateToProps = (state) => ({
     initialized: state.app.initialized
 })
 
-export default compose(
+const AppContainer =  compose(
     withRouter,
     connect(mapStateToProps, {initializeApp}),
 )(App)
+
+const SamuraiJsApp = (props) => {
+      return  <BrowserRouter>
+            <Provider store={store}>
+                <AppContainer/> {/*state={state}  store={store}*/}
+            </Provider>
+        </BrowserRouter>
+
+}
+
+export default SamuraiJsApp

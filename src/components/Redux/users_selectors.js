@@ -13,7 +13,6 @@ export const getisFetching = (state) => {
 
 
 export const getUsersSuper = createSelector(getUsers, getisFetching, (users,isFetching) => {
-    debugger
     return users.filter(u => true)
 
 })

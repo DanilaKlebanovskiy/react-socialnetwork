@@ -8,10 +8,11 @@ import {Textarea} from "../../common/FormsControl/FormsControl";
 import Loading from "../../Users/Loading";
 
 const Myposts = (props) => {
-    if (!props.profile.profile) {
+   if (!props.profile.profile) {
         return <Loading/>
     }
-    let newMessage = props.postsData
+    console.log("render23")
+    let newMessage = [...props.postsData].reverse()
         .map(Message => <Posts
             addEditPost = {props.addEditPost}
             onChangeEdit={props.onChangeEdit}

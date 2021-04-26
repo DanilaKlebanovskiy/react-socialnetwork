@@ -29,7 +29,7 @@ const ProfileInfo = (props) => {
                         <li>Web Site: https://sss.com</li>
                     </ul>
                 </div>
-                <ProfileStatusWithHooks status = {props.status} updateStatus = {props.updateStatus}/>
+                <ProfileStatus status = {props.status} updateStatus = {props.updateStatus}/>
             </div>
         </div>
 

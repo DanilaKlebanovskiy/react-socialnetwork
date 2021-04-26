@@ -1,10 +1,9 @@
 import React from 'react';
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from "react-dom";
-import {BrowserRouter} from "react-router-dom";
-import App from "./App";
+import SamuraiJsApp from "./App";
 import store from "./components/Redux/redux-store";
-import {Provider} from "react-redux";
+
 
 /*setInterval(() => {
     store.dispatch({type: "FAKE"})
@@ -12,13 +11,7 @@ import {Provider} from "react-redux";
 const rerenderEntireTree = (state) => {
 
     ReactDOM.render(
-        <React.StrictMode>
-            <BrowserRouter>
-                <Provider store={store}>
-                    <App state={state}/> {/*state={state}  store={store}*/}
-                </Provider>
-            </BrowserRouter>
-        </React.StrictMode>,
+        <SamuraiJsApp/>,
         document.getElementById('root')
     );
 }
