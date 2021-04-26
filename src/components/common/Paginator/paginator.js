@@ -1,34 +1,31 @@
-import React, { Component } from "react";
+import s from "../../Users/Users.module.css";
+import {useState} from "react";
 
-import Pagination from "react-js-pagination";
-require("bootstrap/less/bootstrap.less");
+const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChenged, portionSize = 10}) => {
 
-class Paginator extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            activePage: 15
-        };
+    let pagesCount = Math.ceil(totalItemsCount / pageSize)
+    let pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
     }
-
-    handlePageChange(pageNumber) {
-        console.log(`active page is ${pageNumber}`);
-        this.setState({activePage: pageNumber});
-    }
-
-    render() {
-        return (
-            <div>
-                <Pagination
-                    activePage={this.state.activePage}
-                    itemsCountPerPage={10}
-                    totalItemsCount={450}
-                    pageRangeDisplayed={5}
-                    onChange={this.handlePageChange.bind(this)}
-                />
-            </div>
-        );
-    }
+    let portionCount = Math.ceil(pagesCount / portionSize)
+    let [portionNumber, setportionNumber] = useState(1)
+    let leftPortionNumber = (portionNumber - 1) * portionSize + 1
+    let rightPortionNumber = portionNumber * portionSize
+    return <div>
+        {portionNumber > 1 &&
+        <button onClick={() => {
+            setportionNumber(portionNumber - 1)
+        }}>Back</button>}
+        {pages
+            .filter(p => p >= leftPortionNumber && p <= rightPortionNumber)
+            .map(c => <span className={currentPage === c && s.selectedPage} onClick={() => {
+                onPageChenged(c)
+            }}>{c}</span>)}
+        {portionCount > portionNumber &&
+        <button onClick={() => {
+            setportionNumber(portionNumber + 1)
+        }}>Next</button>}
+    </div>
 }
-
 export default Paginator
