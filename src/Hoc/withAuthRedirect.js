@@ -1,6 +1,7 @@
 import {Redirect} from "react-router-dom";
 import React from 'react'
 import {connect} from "react-redux";
+import Loading from "../components/Users/Loading";
 
 let mapStateToPropsForRedirect = (state) => {
     return {
@@ -31,3 +32,4 @@ export const withProfileRedirect = (Component) => {
 
     return connectProfileRedirectComponent
 }
+
