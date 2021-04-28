@@ -3,37 +3,36 @@ import Loading from "../../Users/Loading";
 import UserPicture from "../../../assets/users-picture.jpg"
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
 import {ProfileStatusWithHooks} from "./ProfileStatus/ProfileStatusWithHooks";
+import Info from "./Info/Info";
+import React, {useState} from 'react'
 
 
 const ProfileInfo = (props) => {
+    debugger
     if (!props.profile.profile) {
         return <Loading/>
     }
+ /*   let [editmode, setEditMode] = useState(false)
+
+    const activeEditMode = () => {
+        setEditMode(true)
+    }*/
     return (
         <div className={s.profileInfo}>
-
-     {/*       <div className={s.mainPicture}>
-                <img src={props.profile.imgMain}/>
-            </div>*/}
             <div className={s.descriptionBlock}>
-
-                <div><img src={props.profile.profile.photos.large === null ? UserPicture : props.profile.profile.photos.large }/></div>
-
-                <div>
-                    <div>{props.profile.profile.fullName}</div>
-                    <div>Обо мне: {props.profile.profile.aboutMe}</div>
-                    <ul>
-                        <li>Date of Birth: 18 april</li>
-                        <li>City: Saint-Petersburg</li>
-                        <li>Education: SpbGmty</li>
-                        <li>Web Site: https://sss.com</li>
-                    </ul>
+                <div><img
+                    src={props.profile.profile.photos.large || UserPicture}/>
                 </div>
-                <ProfileStatus status = {props.status} updateStatus = {props.updateStatus}/>
+                {props.owner ? null : <button>sele</button> }
+                {false ? <div>test</div> : <Info {...props} />}
+
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
 
     )
 }
 
+
 export default ProfileInfo
+

@@ -1,7 +1,7 @@
 import './App.css';
 import store from "./components/Redux/redux-store";
 import Navbar from './components/Navbar/Navbar';
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {BrowserRouter, HashRouter, Route, withRouter} from "react-router-dom";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import Music from "./components/Music/Music";
@@ -68,11 +68,11 @@ const AppContainer = compose(
 )(App)
 
 const SamuraiJsApp = (props) => {
-    return <BrowserRouter>
+    return <HashRouter>
         <Provider store={store}>
             <AppContainer/> {/*state={state}  store={store}*/}
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 
 }
 

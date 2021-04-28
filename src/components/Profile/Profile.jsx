@@ -11,7 +11,7 @@ import {updateStatusThunk} from "../Redux/profile_reducer";
 const  Profile = (props) => {
 
     return <div className={s.content}>
-            <ProfileInfo profile = {props.profile} status = {props.status} updateStatus = {props.updateStatus}/>
+            <ProfileInfo profile = {props.profile} status = {props.status} updateStatus = {props.updateStatus} owner ={props.owner}/>
         <MypostsContainer />
     </div>
 }

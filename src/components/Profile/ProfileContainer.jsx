@@ -8,27 +8,32 @@ import {compose} from "redux";
 
 
 class ProfileContainer extends React.Component {
-    componentDidMount() {
-
+    refreshProfile () {
         let userId = this.props.match.params.userId
+        console.log(userId)
         if (!userId) {
             userId = this.props.logUserId
             if (!userId) {
                 this.props.history.push("/login")
             }
         }
-
         this.props.getProfileThunk(userId)
-
         this.props.getStatusThunk(userId);
-
-
     }
+    componentDidMount() {
+        debugger
+        this.refreshProfile ()
+    }
+ /*   componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.match.params.userId != prevProps.match.params.userId){
+            this.refreshProfile ()
+        }
+    }*/
 
     render() {
         console.log("render")
         return <Profile {...this.props} profile={this.props.profile} status={this.props.status}
-                        updateStatus={this.props.updateStatusThunk}/>
+                        updateStatus={this.props.updateStatusThunk} owner ={!!this.props.match.params.userId}/>
     }
 
 
