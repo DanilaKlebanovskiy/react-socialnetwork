@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react'
 export const ProfileStatusWithHooks = (props) => {
     let [editmode, setEditMode] = useState(false)
     let [status, setStatus] = useState(props.status)
-
+    useEffect(() => {setStatus(props.status)},[props.status])
     const activeEditMode = () => {
         setEditMode(true)
     }

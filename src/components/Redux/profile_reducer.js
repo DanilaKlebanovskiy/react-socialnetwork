@@ -1,5 +1,4 @@
 import {profileApi, usersApi} from "../../API/api";
-import {toggleFollowingProgress, unfollowUser} from "./users_reducer";
 
 const SET_PROFILE_STATUS = "SET_PROFILE_STATUS"
 const ADD_POST = "ADD-POST";
@@ -10,6 +9,7 @@ const UPDATE_EDIT_TEXT = "UPDATE_EDIT_TEXT";
 const ADD_EDIT_POST = "ADD_EDIT_POST"
 const SET_PROFILE = "SET_PROFILE"
 const DELETE_ONE_POST ="DELETE_ONE_POST"
+const SET_PHOTO ="SET_PHOTO"
 let initialState = {
     postsData: [
         {id: 1, message: 'test', likeCount: '15', flagchange: false, editpostText: ""},
@@ -87,6 +87,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 profileStatus: action.status
             }
+        case SET_PHOTO :
+            return {
+                ...state,
+                profile: {...state.profile, photos : action.images}
+            }
         default:
             return state
     }
@@ -144,6 +149,13 @@ export let setProfile = (profile) => {
 
 }
 
+export let setPhotoActionCreator = (images) => {
+    return {
+        type: SET_PHOTO,
+        images
+    }
+}
+
 export let setProfileStatus = (status) => {
     return {
         type: SET_PROFILE_STATUS,
@@ -177,6 +189,18 @@ export const updateStatusThunk = (status) => {
                     )
             })
     }
+}
+
+export const savePhotoThunk = (image) => {
+    debugger
+    return async (dispatch) => {
+        let response = await profileApi.updatePhoto(image)
+        console.log(response)
+        if (response.resultcode === 0){
+            dispatch(setPhotoActionCreator(response.data.photos))
+        }
+    }
+
 }
 
 export default profileReducer
